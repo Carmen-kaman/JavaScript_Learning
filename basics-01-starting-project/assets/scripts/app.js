@@ -1,6 +1,7 @@
 // alert("Welcome to my page!!!");
 const defualtResult = 0;
 let currentResult = defualtResult;
+let logEntries = [];
 
 function getValue() {
   return parseInt(userInput.value);
@@ -18,6 +19,8 @@ function add() {
   currentResult = currentResult + enterNumber;
   // outputResult(currentResult, calcDescription);
   createAndWriteOutput("+", initialResult, enterNumber);
+  logEntries.push(enterNumber);
+  console.log(logEntries);
 }
 
 function subtract() {
