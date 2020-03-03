@@ -26,7 +26,11 @@ function add() {
     result: currentResult
   };
   logEntries.push(logEntry);
-  console.log(logEntries);
+  console.log(logEntry.operater);
+  console.log(logEntry.prevResult);
+  console.log(logEntry.number);
+  console.log(logEntry.result);
+  // console.log(logEntries);
 }
 
 function subtract() {
