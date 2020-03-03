@@ -12,6 +12,18 @@ function createAndWriteOutput(operater, resultBeforeCalc, calcNumber) {
   outputResult(currentResult, calcDescription);
 }
 
+function writeLog(operator, prevResult, number, result) {
+  const logEntry = {
+    operater: operator,
+    prevResult: prevResult,
+    number: number,
+    result: result
+  };
+  logEntries.push(logEntry);
+  // console.log(logEntry.operater);
+  console.log(logEntries);
+}
+
 function add() {
   const enterNumber = getValue();
   // const calcDescription = `${currentResult} + ${enterNumber}`;
@@ -19,18 +31,7 @@ function add() {
   currentResult = currentResult + enterNumber;
   // outputResult(currentResult, calcDescription);
   createAndWriteOutput("+", initialResult, enterNumber);
-  const logEntry = {
-    operater: "ADD",
-    prevResult: initialResult,
-    number: enterNumber,
-    result: currentResult
-  };
-  logEntries.push(logEntry);
-  console.log(logEntry.operater);
-  console.log(logEntry.prevResult);
-  console.log(logEntry.number);
-  console.log(logEntry.result);
-  // console.log(logEntries);
+  writeLog("ADD", initialResult, enterNumber, currentResult);
 }
 
 function subtract() {
@@ -40,6 +41,7 @@ function subtract() {
   currentResult = currentResult - enterNumber;
   // outputResult(currentResult, calcDescription);
   createAndWriteOutput("-", initialResult, enterNumber);
+  writeLog("SUBTRACT", initialResult, enterNumber, currentResult);
 }
 
 function multiply() {
@@ -49,6 +51,7 @@ function multiply() {
   currentResult = currentResult * enterNumber;
   // outputResult(currentResult, calcDescription);
   createAndWriteOutput("*", initialResult, enterNumber);
+  writeLog("MULTIPLY", initialResult, enterNumber, currentResult);
 }
 
 function divide() {
@@ -58,6 +61,7 @@ function divide() {
   currentResult = currentResult / enterNumber;
   // outputResult(currentResult, calcDescription);
   createAndWriteOutput("/", initialResult, enterNumber);
+  writeLog("DIVIDE", initialResult, enterNumber, currentResult);
 }
 
 addBtn.addEventListener("click", add);
