@@ -25,6 +25,15 @@ function writeLog(operator, prevResult, number, result) {
 }
 
 function calculateResult(calculationType) {
+  if (
+    calculationType !== "ADD" &&
+    calculationType !== "SUBSTRACT" &&
+    calculationType !== "MULTIPLY" &&
+    calculationType !== "DIVIDE"
+  ) {
+    return;
+  }
+
   const enterNumber = getValue();
   const initialResult = currentResult;
   let mathOperator;
