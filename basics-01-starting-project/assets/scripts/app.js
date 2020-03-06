@@ -24,24 +24,27 @@ function writeLog(operator, prevResult, number, result) {
   console.log(logEntries);
 }
 
-function add() {
+function calculateResult(calculationType) {
   const enterNumber = getValue();
-  // const calcDescription = `${currentResult} + ${enterNumber}`;
   const initialResult = currentResult;
-  currentResult = currentResult + enterNumber;
-  // outputResult(currentResult, calcDescription);
-  createAndWriteOutput("+", initialResult, enterNumber);
-  writeLog("ADD", initialResult, enterNumber, currentResult);
+  let mathOperator;
+  if (calculationType === "ADD") {
+    currentResult = currentResult + enterNumber;
+    mathOperator = "+";
+  } else {
+    currentResult = currentResult - enterNumber;
+    mathOperator = "-";
+  }
+  createAndWriteOutput(mathOperator, initialResult, enterNumber);
+  writeLog(calculationType, initialResult, enterNumber, currentResult);
+}
+
+function add() {
+  calculateResult("ADD");
 }
 
 function subtract() {
-  const enterNumber = getValue();
-  // const calcDescription = `${currentResult} - ${enterNumber}`;
-  const initialResult = currentResult;
-  currentResult = currentResult - enterNumber;
-  // outputResult(currentResult, calcDescription);
-  createAndWriteOutput("-", initialResult, enterNumber);
-  writeLog("SUBTRACT", initialResult, enterNumber, currentResult);
+  calculateResult("SUBTRACT");
 }
 
 function multiply() {
