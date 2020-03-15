@@ -14,7 +14,7 @@ for (const item of lists) {
 
 // Q2-1
 const title = document.querySelector("head title");
-title.text = "Assignment - Solved !!!";
+title.textContent = "Assignment - Solved !!!";
 
 // Q3
 const h1 = document.querySelector("h1");
