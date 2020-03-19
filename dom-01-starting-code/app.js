@@ -18,3 +18,19 @@ buttton.addEventListener("click", () => {
   // section.classList.toggle("visible");
   section.classList.toggle("invisible");
 });
+
+// add element via html code
+const list = document.querySelector("ul");
+// list.innerHTML = "<li>Intem 4</li>";
+list.innerHTML = list.innerHTML + "<li>Intem 4</li>";
+
+const div = document.querySelector("div");
+div.innerHTML = div.innerHTML + "<p>Something went wrong!!!</p>";
+
+div.insertAdjacentHTML("beforebegin", "<p>BeforeBegin</p>");
+
+div.insertAdjacentHTML("afterbegin", "<p>afterBegin</p>");
+
+div.insertAdjacentHTML("beforeend", "<p>BeforeEnd</p>");
+
+div.insertAdjacentHTML("afterend", "<p>afterEnd</p>");
