@@ -53,3 +53,26 @@ const newItem = document.createElement("li");
 newItem.textContent = "Item 6";
 newItem.style.backgroundColor = "red";
 secLi.insertAdjacentElement("beforebegin", newItem);
+
+// clone DOM node
+const cloneItem = newItem.cloneNode(true);
+// cloneItem.textContent = ''
+list.append(newItem, cloneItem);
+
+// live node list vs static node list
+const listItems = list.querySelectorAll("li");
+const listItems2 = list.getElementsByTagName("li");
+
+const insertItem = document.createElement("li");
+insertItem.textContent = "Item 7";
+
+list.append(insertItem);
+
+// static node list
+console.log(listItems);
+// live node list
+console.log(listItems2);
+
+// remove element
+// list.remove(); //remove all elements
+list.parentElement.removeChild();
