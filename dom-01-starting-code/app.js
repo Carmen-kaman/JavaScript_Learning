@@ -37,6 +37,19 @@ div.insertAdjacentHTML("afterend", "<p>afterEnd</p>");
 
 // adding element via createELement()
 const item = document.createElement("li");
-list.appendChild(item);
+// list.appendChild(item);
 item.textContent = "createElemt Item 5";
 item.style.backgroundColor = "blue";
+
+// inserting DOM element
+list.lastElementChild.before(item);
+
+list.lastElementChild.after(item);
+
+list.firstElementChild.replaceWith(item);
+
+const secLi = list.children[1];
+const newItem = document.createElement("li");
+newItem.textContent = "Item 6";
+newItem.style.backgroundColor = "red";
+secLi.insertAdjacentElement("beforebegin", newItem);
