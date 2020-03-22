@@ -75,4 +75,4 @@ console.log(listItems2);
 
 // remove element
 // list.remove(); //remove all elements
-list.parentElement.removeChild();
+// list.parentElement.removeChild();
