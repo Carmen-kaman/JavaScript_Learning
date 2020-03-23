@@ -12,6 +12,7 @@ const confirmAddMovieButton = cancelAddMovieButton.nextElementSibling;
 const userInput = addMovieModal.querySelectorAll("input");
 // const userInput = addMovieModal.getElementsByTagName("input");
 const entryTextSection = document.getElementById("entry-text");
+const deleteMovieModal = document.getElementById("delete-modal");
 
 const movies = [];
 
@@ -21,6 +22,11 @@ const updateUI = () => {
   } else {
     entryTextSection.style.display = "none";
   }
+};
+
+const closeMovieDeletionModal = () => {
+  toggleBackdrop();
+  deleteMovieModal.classList.remove("visible");
 };
 
 const deleteMovieHandler = movieId => {
@@ -37,6 +43,29 @@ const deleteMovieHandler = movieId => {
   const listRoot = document.getElementById("movie-list");
   listRoot.children[movieIndex].remove();
   // listRoot.removeChild(listRoot.children[movieIndex]);
+  closeMovieDeletionModal();
+  updateUI();
+};
+
+const starDeleteMovieHandler = movieId => {
+  deleteMovieModal.classList.add("visible");
+  toggleBackdrop();
+
+  const cancelDeletionButton = deleteMovieModal.querySelector(".btn--passive");
+  let confrimDeletionButton = deleteMovieModal.querySelector(".btn--danger");
+
+  confrimDeletionButton.replaceWith(confrimDeletionButton.cloneNode(true));
+
+  confrimDeletionButton = deleteMovieModal.querySelector(".btn--danger");
+
+  cancelDeletionButton.removeEventListener("click", closeMovieDeletionModal);
+  // confrimDeletionButton.removeEventListener("click", deleteMovieHandler(movieId));
+
+  cancelDeletionButton.addEventListener("click", closeMovieDeletionModal);
+  confrimDeletionButton.addEventListener(
+    "click",
+    deleteMovieHandler.bind(null, movieId)
+  );
 };
 
 const renderNewMovieElement = (id, title, imageUrl, rating) => {
@@ -52,7 +81,10 @@ const renderNewMovieElement = (id, title, imageUrl, rating) => {
     </div>
   `;
 
-  newMovieElement.addEventListener("click", deleteMovieHandler.bind(null, id));
+  newMovieElement.addEventListener(
+    "click",
+    starDeleteMovieHandler.bind(null, id)
+  );
   const listRoot = document.getElementById("movie-list");
   listRoot.append(newMovieElement);
 };
@@ -61,9 +93,13 @@ const toggleBackdrop = () => {
   backdrop.classList.toggle("visible");
 };
 
-const toggleMovieModal = () => {
+const closeMovieModal = () => {
+  addMovieModal.classList.remove("visible");
+};
+
+const showMovieModal = () => {
   // function(){}
-  addMovieModal.classList.toggle("visible");
+  addMovieModal.classList.add("visible");
   toggleBackdrop();
 };
 
@@ -74,7 +110,8 @@ const clearMovieInput = () => {
 };
 
 const cancelAddMovieHandler = () => {
-  toggleMovieModal();
+  closeMovieModal();
+  toggleBackdrop();
   clearMovieInput();
 };
 
@@ -103,7 +140,8 @@ const addMovieHandler = () => {
 
   movies.push(newMovie);
   console.log(movies);
-  toggleMovieModal();
+  closeMovieModal();
+  toggleBackdrop();
   clearMovieInput();
   renderNewMovieElement(
     newMovie.id,
@@ -115,10 +153,12 @@ const addMovieHandler = () => {
 };
 
 const backdropClickHandler = () => {
-  toggleMovieModal();
+  closeMovieModal();
+  closeMovieDeletionModal();
+  clearMovieInput();
 };
 
-startAddMovieButton.addEventListener("click", toggleMovieModal);
+startAddMovieButton.addEventListener("click", showMovieModal);
 backdrop.addEventListener("click", backdropClickHandler);
 cancelAddMovieButton.addEventListener("click", cancelAddMovieHandler);
 confirmAddMovieButton.addEventListener("click", addMovieHandler);
