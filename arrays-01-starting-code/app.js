@@ -35,3 +35,24 @@ const obj_num = Array.of(1, 2);
 console.log(obj_num);
 // obj_num.push(6);
 // console.log(obj_num);
+
+// push(),pop(), unshift(), shift() adding & removing
+const hobbies = ["sports", "cooking"];
+hobbies.push("reading"); //add the element in the end of the array
+hobbies.unshift("coding"); //add the element in the start of the array
+
+hobbies.pop(); // remove the last element from the array and return it
+hobbies.shift(); // remove the first element from the array and return it
+console.log(hobbies);
+
+// splice() method
+hobbies.splice(0, 0, "Good Food");
+console.log(hobbies);
+
+hobbies.splice(1, 0, "Good Nice");
+console.log(hobbies);
+
+// negative number is right index of the array
+const removeEle = hobbies.splice(-2, 2);
+console.log(removeEle);
+console.log(hobbies);
