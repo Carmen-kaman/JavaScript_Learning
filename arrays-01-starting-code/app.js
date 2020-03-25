@@ -56,3 +56,48 @@ console.log(hobbies);
 const removeEle = hobbies.splice(-2, 2);
 console.log(removeEle);
 console.log(hobbies);
+
+// selecting ranges and creating copy with slice() method
+const testResult = [1, 5.3, 1.5, 10.99, -5, -11.11];
+const res = testResult.slice(0, 3); //this is a copy of the testResult, range [0,3) or range[0, length)=(0)
+testResult.push(5.99);
+
+console.log(testResult, res);
+
+// adding array to array with concat();
+// concat() adding the element in the end of the array.
+const concatArray = testResult.concat(hobbies);
+console.log(concatArray);
+
+console.log(concatArray.indexOf("Good Nice"));
+
+// find object index in the array
+const personInfo = [{ name: "max" }, { name: "tom" }];
+const per = personInfo.find((person, idx, persons) => {
+  return person.name === "max";
+});
+
+console.log(per);
+
+const perIndex = personInfo.findIndex((person, idx, persons) => {
+  return person.name === "max";
+});
+
+console.log(perIndex);
+
+// foreach
+const prices = [10.99, 5.99, 4.99, 3.99, 6.59];
+const tax = 0.19;
+const taxAdjustedPrices = [];
+
+// for (const p of prices) {
+//   taxAdjustedPrices.push(p * (1 + tax));
+// }
+
+prices.forEach((p, idx, prices) => {
+  // taxAdjustedPrices.push(p * (1 + tax));
+  const priceObj = { index: idx, taxPrice: p * (1 + tax) };
+  taxAdjustedPrices.push(priceObj);
+});
+
+console.log(taxAdjustedPrices);
