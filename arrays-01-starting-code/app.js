@@ -145,3 +145,34 @@ console.log(filteredArray);
 const sum = prices.reduce((preValue, curValue) => preValue + curValue, 0);
 
 console.log(sum);
+
+// split and join
+const data = "new york; 10.99; 2000";
+
+const transferedData = data.split(";");
+transferedData[1] = +transferedData[1];
+console.log(transferedData);
+
+const nameFragements = ["Max", "Schwarz"];
+const name = nameFragements.join(" "); // comma is defualt
+console.log(name);
+
+// spread operator
+const copyNameFragments = [...nameFragements];
+copyNameFragments.push("John");
+console.log(nameFragements, copyNameFragments);
+
+console.log(Math.min(...prices));
+
+const persons = [
+  { name: "max", age: 30 },
+  { name: "Manuel", age: 31 }
+];
+const copyPersons = [...persons];
+copyPersons.push({ name: "Anne", age: 25 });
+const copyPersons2 = [
+  ...persons.map(person => ({ name: person.name, age: person.age }))
+];
+
+persons[0].age = 18; //also affect copyPersons, not affect copyPerson2
+console.log(persons, copyPersons, copyPersons2);
