@@ -88,16 +88,45 @@ console.log(perIndex);
 // foreach
 const prices = [10.99, 5.99, 4.99, 3.99, 6.59];
 const tax = 0.19;
-const taxAdjustedPrices = [];
+// const taxAdjustedPrices = [];
 
 // for (const p of prices) {
 //   taxAdjustedPrices.push(p * (1 + tax));
 // }
 
-prices.forEach((p, idx, prices) => {
-  // taxAdjustedPrices.push(p * (1 + tax));
+// prices.forEach((p, idx, prices) => {
+//   // taxAdjustedPrices.push(p * (1 + tax));
+//   const priceObj = { index: idx, taxPrice: p * (1 + tax) };
+//   taxAdjustedPrices.push(priceObj);
+// });
+
+// console.log(taxAdjustedPrices);
+
+// transforming data with map()
+const taxAdjustedPrices = prices.map((p, idx, prices) => {
   const priceObj = { index: idx, taxPrice: p * (1 + tax) };
-  taxAdjustedPrices.push(priceObj);
+  // taxAdjustedPrices.push(priceObj);
+  return priceObj;
 });
 
-console.log(taxAdjustedPrices);
+console.log(prices, taxAdjustedPrices);
+
+// the other ways of transforming array
+const sortPrice = prices.sort((a, b) => {
+  if (a > b) {
+    return 1;
+  } else if (a === b) {
+    return 0;
+  } else {
+    return -1;
+  }
+});
+console.log(sortPrice.reverse);
+
+// filtering the array with filter()
+// const filteredArray = prices.filter((p, id, ps) => {
+//   return p > 6;
+// });
+
+const filteredArray = prices.filter(p => p > 6);
+console.log(filteredArray);
