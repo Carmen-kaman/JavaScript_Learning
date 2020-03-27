@@ -183,3 +183,43 @@ const nameArray = ["max", "john", "Mr", 30];
 // const lastName = nameArray[1];
 const [firstName, lastName, ...otherInfo] = nameArray;
 console.log(firstName, lastName, otherInfo);
+
+// Sets
+const ids = new Set([1, 2, 3]);
+ids.add(2);
+if (ids.has(1)) {
+  ids.delete(1);
+}
+// console.log(ids.has(2));
+for (const item of ids.values()) {
+  console.log(item);
+}
+
+// map
+
+const person1 = { name: "max" };
+const person2 = { name: "Anne" };
+const personDate = new Map([[person1, [{ date: "yesterday", price: 10 }]]]);
+personDate.set(person2, [{ date: "two weeks ago", price: 100 }]);
+
+console.log(personDate);
+console.log(personDate.get(person1));
+
+for (const entry of personDate.entries()) {
+  console.log(entry);
+}
+
+// array destructor
+for (const [key, value] of personDate.entries()) {
+  console.log(key, value);
+}
+
+for (const key of personDate.keys()) {
+  console.log(key);
+}
+
+for (const value of personDate.values()) {
+  console.log(value);
+}
+
+console.log(personDate.size);
