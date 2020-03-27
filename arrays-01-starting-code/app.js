@@ -223,3 +223,15 @@ for (const value of personDate.values()) {
 }
 
 console.log(personDate.size);
+
+// weak set
+let p1 = { name: "man" };
+const weakPerson = new WeakSet();
+weakPerson.add(p1);
+
+console.log(p1);
+
+// weak map
+const perWeak = new WeakMap();
+perWeak.set(p1, "xxxx");
+console.log(perWeak);
