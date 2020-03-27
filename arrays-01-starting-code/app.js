@@ -176,3 +176,10 @@ const copyPersons2 = [
 
 persons[0].age = 18; //also affect copyPersons, not affect copyPerson2
 console.log(persons, copyPersons, copyPersons2);
+
+// array destructor
+const nameArray = ["max", "john", "Mr", 30];
+// const firstName = nameArray[0];
+// const lastName = nameArray[1];
+const [firstName, lastName, ...otherInfo] = nameArray;
+console.log(firstName, lastName, otherInfo);
