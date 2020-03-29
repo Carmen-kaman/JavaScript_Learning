@@ -30,7 +30,7 @@ const searchBtn = document.getElementById("search-btn");
 
 const movie = [];
 
-const renderMovies = () => {
+const renderMovies = (filters = "") => {
   const movieList = document.getElementById("movie-list");
 
   if (movie.length === 0) {
@@ -41,7 +41,17 @@ const renderMovies = () => {
   }
   movieList.innerHTML = "";
 
-  movie.forEach(item => {
+  // const filteredMovie = !filters
+  //   ? movie
+  //   : movie.filter(item => {
+  //       return item.info.title.includes(filters);
+  //     });
+
+  const filteredMovie = !filters
+    ? movie
+    : movie.filter(item => item.info.title.includes(filters));
+
+  filteredMovie.forEach(item => {
     const movieEL = document.createElement("li");
     // movieEL.textContent = item.info.title;
     let text = item.info.title + " - ";
@@ -81,4 +91,10 @@ const addMovieHandler = () => {
   // console.log(newMovie);
 };
 
+const searchMovieHandler = () => {
+  const filterTerm = document.getElementById("filter-title").value;
+  renderMovies(filterTerm);
+};
+
 addMovieBtn.addEventListener("click", addMovieHandler);
+searchBtn.addEventListener("click", searchMovieHandler);
