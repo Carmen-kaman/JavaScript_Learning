@@ -1,19 +1,31 @@
+class Product {
+  title = "DEFAULT";
+  imageUrl;
+  price;
+  description;
+
+  constructor(title, imageUrl, price, description) {
+    this.title = title;
+    this.imageUrl = imageUrl;
+    this.price = price;
+    this.description = description;
+  }
+}
+
 const productList = {
   products: [
-    {
-      title: "A Pillow",
-      imageUrl:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-pillows-for-snoring-1583781181.png?crop=0.625xw:0.916xh;0.194xw,0.0835xh&resize=640:*",
-      price: 19.99,
-      description: "A soft pillow!"
-    },
-    {
-      title: "A Carpet",
-      imageUrl:
-        "https://lh3.googleusercontent.com/proxy/Nkcf1PURArLAs0PeeOp8j4VnvhIU2EKnstXP6H4Nqk_xnOjhQHL1bdTNz_WustAPus1vlQz6v0NeRHVA_cj6G0kqwrkjXrSK9VU5nVCkFDVewCOMdN8spk61uy7O9ojWJMVlPbY",
-      price: 89.99,
-      description: "A carpet which you might like - or not!"
-    }
+    new Product(
+      "A Pillow",
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-pillows-for-snoring-1583781181.png?crop=0.625xw:0.916xh;0.194xw,0.0835xh&resize=640:*",
+      19.99,
+      "A soft pillow!"
+    ),
+    new Product(
+      "A Carpet",
+      "https://lh3.googleusercontent.com/proxy/Nkcf1PURArLAs0PeeOp8j4VnvhIU2EKnstXP6H4Nqk_xnOjhQHL1bdTNz_WustAPus1vlQz6v0NeRHVA_cj6G0kqwrkjXrSK9VU5nVCkFDVewCOMdN8spk61uy7O9ojWJMVlPbY",
+      89.99,
+      "A carpet which you might like - or not!"
+    )
   ],
   render() {
     const renderHook = document.getElementById("app");
