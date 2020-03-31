@@ -17,6 +17,11 @@ class ProductItem {
     this.product = product;
   }
 
+  addToCart() {
+    console.log("Adding the product to the cart...");
+    console.log(this.product);
+  }
+
   render() {
     const prodEl = document.createElement("li");
     prodEl.className = "product-item";
@@ -31,6 +36,8 @@ class ProductItem {
           </div>
         </div>
       `;
+    const addCartBtn = prodEl.querySelector("button");
+    addCartBtn.addEventListener("click", this.addToCart.bind(this));
     return prodEl;
   }
 }
