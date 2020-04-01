@@ -15,6 +15,11 @@ class Product {
 class ShoppingCart {
   item = [];
 
+  addProduct(product) {
+    this.item.push(product);
+    this.totalOutput.innerHTML = `<h2>Total: \$${1}</h2>`;
+  }
+
   render() {
     const cartEl = document.createElement("section");
     cartEl.innerHTML = `
@@ -22,6 +27,7 @@ class ShoppingCart {
       <button>Order Now!</button>
     `;
     cartEl.className = "cart";
+    this.totalOutput = cartEl.querySelector("h2");
     return cartEl;
   }
 }
@@ -32,8 +38,10 @@ class ProductItem {
   }
 
   addToCart() {
-    console.log("Adding the product to the cart...");
-    console.log(this.product);
+    // console.log("Adding the product to the cart...");
+    // console.log(this.product);
+    // ShoppingCart.addProduct();
+    App.addProductToCart(this.product);
   }
 
   render() {
@@ -66,7 +74,7 @@ class ProductList {
     ),
     new Product(
       "A Carpet",
-      "https://lh3.googleusercontent.com/proxy/Nkcf1PURArLAs0PeeOp8j4VnvhIU2EKnstXP6H4Nqk_xnOjhQHL1bdTNz_WustAPus1vlQz6v0NeRHVA_cj6G0kqwrkjXrSK9VU5nVCkFDVewCOMdN8spk61uy7O9ojWJMVlPbY",
+      "https://secure.img1-fg.wfcdn.com/im/68940585/resize-h800%5Ecompr-r85/3097/30973428/Traditional+Teachings+Area+Rug.jpg",
       89.99,
       "A carpet which you might like - or not!"
     )
@@ -89,8 +97,8 @@ class Shop {
   render() {
     const renderHook = document.getElementById("app");
 
-    const cart = new ShoppingCart();
-    const cartEl = cart.render();
+    this.cart = new ShoppingCart();
+    const cartEl = this.cart.render();
     const productList = new ProductList();
     const prodListEl = productList.render();
 
@@ -99,5 +107,17 @@ class Shop {
   }
 }
 
-const shop = new Shop();
-shop.render();
+class App {
+  static cart;
+
+  static init() {
+    const shop = new Shop();
+    shop.render();
+    this.cart = shop.cart;
+  }
+  static addProductToCart(product) {
+    this.cart.addProduct(product);
+  }
+}
+
+App.init();
