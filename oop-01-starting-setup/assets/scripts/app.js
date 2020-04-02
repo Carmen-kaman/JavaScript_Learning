@@ -20,9 +20,14 @@ class ElementAttribute {
 }
 
 class Component {
-  constructor(renderHookId) {
+  constructor(renderHookId, shouldRender = true) {
     this.hookId = renderHookId;
+    if (shouldRender) {
+      this.render();
+    }
   }
+
+  render() {}
 
   createRootElement(tag, cssClasses, attributes) {
     const rootElement = document.createElement(tag);
@@ -80,8 +85,9 @@ class ShoppingCart extends Component {
 
 class ProductItem extends Component {
   constructor(product, renderHookId) {
-    super(renderHookId);
+    super(renderHookId, false);
     this.product = product;
+    this.render();
   }
 
   addToCart() {
@@ -110,22 +116,35 @@ class ProductItem extends Component {
 }
 
 class ProductList extends Component {
-  products = [
-    new Product(
-      "A Pillow",
-      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-pillows-for-snoring-1583781181.png?crop=0.625xw:0.916xh;0.194xw,0.0835xh&resize=640:*",
-      19.99,
-      "A soft pillow!"
-    ),
-    new Product(
-      "A Carpet",
-      "https://secure.img1-fg.wfcdn.com/im/68940585/resize-h800%5Ecompr-r85/3097/30973428/Traditional+Teachings+Area+Rug.jpg",
-      89.99,
-      "A carpet which you might like - or not!"
-    )
-  ];
+  products = [];
+
   constructor(renderHookId) {
     super(renderHookId);
+    this.fetchProduct();
+  }
+
+  fetchProduct() {
+    this.products = [
+      new Product(
+        "A Pillow",
+        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-pillows-for-snoring-1583781181.png?crop=0.625xw:0.916xh;0.194xw,0.0835xh&resize=640:*",
+        19.99,
+        "A soft pillow!"
+      ),
+      new Product(
+        "A Carpet",
+        "https://secure.img1-fg.wfcdn.com/im/68940585/resize-h800%5Ecompr-r85/3097/30973428/Traditional+Teachings+Area+Rug.jpg",
+        89.99,
+        "A carpet which you might like - or not!"
+      )
+    ];
+    this.renderProducts();
+  }
+
+  renderProducts() {
+    for (const prod of this.products) {
+      new ProductItem(prod, "prod-list");
+    }
   }
 
   render() {
@@ -135,21 +154,21 @@ class ProductList extends Component {
     // const prodList = document.createElement("ul");
     // prodList.id = "pro-list";
     // prodList.className = "product-list";
-    for (const prod of this.products) {
-      const productItem = new ProductItem(prod, "prod-list");
-      productItem.render();
+    if (this.products && this.products.length > 0) {
+      this.renderProducts();
     }
   }
 }
 
 class Shop {
+  constructor() {
+    this.render();
+  }
   render() {
     // const renderHook = document.getElementById("app");
 
     this.cart = new ShoppingCart("app");
-    this.cart.render();
-    const productList = new ProductList("app");
-    productList.render();
+    new ProductList("app");
   }
 }
 
@@ -158,7 +177,6 @@ class App {
 
   static init() {
     const shop = new Shop();
-    shop.render();
     this.cart = shop.cart;
   }
   static addProductToCart(product) {
