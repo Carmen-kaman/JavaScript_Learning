@@ -62,7 +62,12 @@ class ShoppingCart extends Component {
   }
 
   constructor(renderHookId) {
-    super(renderHookId);
+    super(renderHookId, false);
+    this.orderProduct = () => {
+      console.log("Ordering...");
+      console.log(this.item);
+    };
+    this.render();
   }
 
   addProduct(product) {
@@ -77,9 +82,14 @@ class ShoppingCart extends Component {
       <h2>Total: \$${0}</h2>
       <button>Order Now!</button>
     `;
-    cartEl.className = "cart";
+    // cartEl.className = "cart";
+    const orderButton = cartEl.querySelector("button");
+    // orderButton.addEventListener("click", this.orderProduct.bind(this));
+    // orderButton.addEventListener("click", () => this.orderProduct());
+    orderButton.addEventListener("click", this.orderProduct);
+
     this.totalOutput = cartEl.querySelector("h2");
-    return cartEl;
+    // return cartEl;
   }
 }
 
@@ -116,15 +126,16 @@ class ProductItem extends Component {
 }
 
 class ProductList extends Component {
-  products = [];
+  #products = [];
 
   constructor(renderHookId) {
-    super(renderHookId);
+    super(renderHookId, false);
+    this.render();
     this.fetchProduct();
   }
 
   fetchProduct() {
-    this.products = [
+    this.#products = [
       new Product(
         "A Pillow",
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-pillows-for-snoring-1583781181.png?crop=0.625xw:0.916xh;0.194xw,0.0835xh&resize=640:*",
@@ -142,7 +153,7 @@ class ProductList extends Component {
   }
 
   renderProducts() {
-    for (const prod of this.products) {
+    for (const prod of this.#products) {
       new ProductItem(prod, "prod-list");
     }
   }
@@ -154,7 +165,7 @@ class ProductList extends Component {
     // const prodList = document.createElement("ul");
     // prodList.id = "pro-list";
     // prodList.className = "product-list";
-    if (this.products && this.products.length > 0) {
+    if (this.#products && this.#products.length > 0) {
       this.renderProducts();
     }
   }
