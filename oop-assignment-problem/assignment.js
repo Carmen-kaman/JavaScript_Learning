@@ -1,30 +1,29 @@
 class Course {
+  #price;
   constructor(title, len, price) {
     this.title = title;
     this.length = len;
-    this.price = price;
+    this.#price = price;
   }
 
-  get #GetPrice() {
-    return `\$${this.price}`;
+  get GetPrice() {
+    return `\$${this.#price}`;
   }
 
-  set #SetPrice(newPrice) {
+  set SetPrice(newPrice) {
     if (newPrice < 0) {
       console.log("The price should be positive number!!!");
       return;
     }
-    this.price = newPrice;
+    this.#price = newPrice;
   }
 
   Paid() {
-    return this.length / this.price;
+    return this.length / this.#price;
   }
 
   OutputSummary() {
-    return `title:${this.title}, length:${this.length}, price:${
-      this.#GetPrice
-    }`;
+    return `title:${this.title}, length:${this.length}, price:${this.#price}`;
   }
 }
 
@@ -52,6 +51,8 @@ console.log(course_2, course_2.Paid(), course_2.OutputSummary());
 
 const practice = new PracticalCourse("Java", 24, 15.99, 3);
 const theoretical = new TheoreticalCourse("JS", 36, 19.99);
+
+practice.SetPrice = -1;
 
 console.log(practice, practice.Paid(), practice.OutputSummary());
 console.log(
