@@ -110,9 +110,14 @@ class ProjectItem {
   }
 
   connectDrag() {
-    document.getElementById(this.id).addEventListener("dragstart", (event) => {
+    const item = document.getElementById(this.id);
+    item.addEventListener("dragstart", (event) => {
       event.dataTransfer.setData("text/plain", this.id);
       event.dataTransfer.effectAllowed = "move";
+    });
+
+    item.addEventListener("dragend", (event) => {
+      console.log(event);
     });
   }
 
@@ -177,6 +182,19 @@ class ProjectList {
       if (event.relatedTarget.closest(`#${this.type}-project ul`) !== list) {
         list.parentElement.classList.remove("droppable");
       }
+    });
+
+    list.addEventListener("drop", (event) => {
+      const proId = event.dataTransfer.getData("text/plain");
+      if (this.projects.find((p) => p.id === proId)) {
+        return;
+      }
+      document
+        .getElementById(proId)
+        .querySelector("button:last-of-type")
+        .click();
+      list.parentElement.classList.remove("droppable");
+      event.preventDefault(); //not required
     });
   }
 
